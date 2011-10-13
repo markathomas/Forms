@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+/*
+ *
+ *  * Licensed to the Apache Software Foundation (ASF) under one or more
+ *  * contributor license agreements.  See the NOTICE file distributed with
+ *  * this work for additional information regarding copyright ownership.
+ *  * The ASF licenses this file to You under the Apache License, Version 2.0
+ *  * (the "License"); you may not use this file except in compliance with
+ *  * the License.  You may obtain a copy of the License at
+ *  *
+ *  *      http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ */
+ -->
+<ivy-module version="1.0">
+
+    <info organisation="org.vaadin" module="serverpush" status="release">
+        <license name="Apache 2.0"/>
+        <ivyauthor name="Mark Thomas"/>
+        <description homepage="http://vaadin.com/directory#addon/forms">
+            Vaadin Forms Add-On
+        </description>
+    </info>
+
+    <configurations defaultconfmapping="*-&gt;default">
+        <conf name="build" description="Required to build our project"/>
+        <conf name="vaadin" description="Vaadin JAR"/>
+        <conf name="samples" description="JARs for samples"/>
+    </configurations>
+
+    <dependencies>
+        <dependency force="true" org="com.vaadin" name="vaadin" rev="6.7.0" conf="build,vaadin,samples->default"/>
+        <dependency force="true" org="com.google" name="gwt" rev="2.4.0" conf="build,samples->runtime"/>
+    </dependencies>
+
+</ivy-module>

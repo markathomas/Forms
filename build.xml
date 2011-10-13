@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="forms"
+  default="modules"
+  basedir=".">
+
+    <target name="modules" description="Builds modules">
+        <ant antfile="build.xml" target="all" dir="modules/forms"/>
+    </target>
+
+    <target name="samples" description="Builds samples">
+    </target>
+
+</project>
