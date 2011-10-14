@@ -19,6 +19,7 @@
 
 package org.vaadin.addons.forms;
 
+import com.vaadin.data.Item;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.GridLayout;
@@ -29,7 +30,6 @@ import java.util.Map;
 
 public class GridForm extends Form {
 
-    private final GridLayout layout;
     private final GridConstraints constraints = new GridConstraints();
 
     public GridForm() {
@@ -38,11 +38,13 @@ public class GridForm extends Form {
 
     public GridForm(int cols, int rows) {
         super(new GridLayout(cols, rows));
-        this.layout = (GridLayout)getLayout();
+        getLayout().setSpacing(true);
+        getLayout().setMargin(false, false, true, false);
     }
 
-    public void setSpacing(boolean spacing) {
-        this.layout.setSpacing(spacing);
+    @Override
+    public GridLayout getLayout() {
+        return (GridLayout)super.getLayout();
     }
 
     public void setConstraints(GridConstraints gridConstraints) {
@@ -57,6 +59,24 @@ public class GridForm extends Form {
             }
             setVisibleItemProperties(visibleProperties);
         }
+    }
+
+    /**
+         * Sets the Item that serves as the data source of the viewer.
+         *
+         * @param newDataSource
+         *            The new data source Item
+         */
+    public void setItemDataSource(Item newDataSource) {
+        this.setItemDataSource(newDataSource, this.constraints);
+    }
+
+    public void setItemDataSource(Item newDataSource, GridConstraints constraints) {
+        if (constraints != null && constraints.size() > 0) {
+            super.setItemDataSource(newDataSource, constraints.getPropertyIds());
+            this.setConstraints(constraints);
+        } else
+            super.setItemDataSource(newDataSource);
     }
 
     /**
@@ -87,12 +107,14 @@ public class GridForm extends Form {
             final int startRow = constraint.getStartRow();
             final int endRow = constraint.getEndRow();
             if (startCol == endCol)
-                this.layout.addComponent(field, startCol, startRow);
+                getLayout().addComponent(field, startCol, startRow);
             else {
                 field.setWidth("100%");
-                this.layout.addComponent(field, startCol, startRow, endCol, endRow);
+                if (startRow != endRow)
+                    field.setHeight("100%");
+                getLayout().addComponent(field, startCol, startRow, endCol, endRow);
             }
         } else if (this.constraints.size() == 0)
-            this.layout.addComponent(field);
+            getLayout().addComponent(field);
     }
 }

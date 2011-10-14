@@ -1,0 +1,6 @@
+Forms aims to provide the developer with easier ways to create Vaadin Form objects and more control over the layout of the form.
+
+Currently, this add-on only provides a single implementation named GridForm.  This object is a Vaadin Form using a GridLayout to lay
+out the components.  While a Vaadin Form can use a GridLayout already, there is no support for actually telling the form where to
+place the components nor is there the ability to have components span multiple rows and columns.  GridForm attempts to solve this
+problem.

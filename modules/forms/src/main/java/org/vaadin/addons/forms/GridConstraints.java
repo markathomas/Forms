@@ -20,12 +20,13 @@
 package org.vaadin.addons.forms;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class GridConstraints {
-    private final Map<Object, GridConstraint> constraintMap = new HashMap<Object, GridConstraint>();
+
+    private final Map<Object, GridConstraint> constraintMap = new LinkedHashMap<Object, GridConstraint>();
 
     public void addConstraint(Object propertyId, int col, int row) {
         this.addConstraint(propertyId, col, row, col, row);
