@@ -67,9 +67,13 @@
       description="--> cleans project, checks for style violations, builds war file, generates all reports"/>
 
     <target name="dist" depends="clean, mkdirs, vaadin-dist"
-      description="--> cleans project and builds WAR file"/>
+      description="--> cleans project and builds file for distribution"/>
 
-    <target name="vaadin-dist" depends="mkdirs, javac"
+    <target name="samples" description="--> builds samples">
+        <ant antfile="build.xml" target="all" dir="../../samples/locationform" inheritall="false"/>
+    </target>
+
+    <target name="vaadin-dist" depends="mkdirs, samples"
       unless="vaadin-dist.completed" description="--> make Vaadin add-on archive">
         <antcontrib:outofdate>
             <sourcefiles>
@@ -85,7 +89,7 @@
                         <attribute name="Build-User" value="${user.name}"/>
                         <attribute name="Build-Time" value="${TODAY} ${TSTAMP}"/>
                         <attribute name="Vaadin-Package-Version" value="1"/>
-                        <attribute name="Implementation-Title" value="ServerPush"/>
+                        <attribute name="Implementation-Title" value="Forms"/>
                         <attribute name="Implementation-Version" value="${base.version}"/>
                         <attribute name="Vaadin-Addon" value="${base.name}-${base.version}.jar"/>
                     </manifest>
@@ -93,12 +97,12 @@
                 </jar>
 
                 <!-- Build zip file -->
-                <jar destfile="build/dist/${base.name}-${base.version}.zip" basedir="build/dist">
+                <jar destfile="build/dist/${base.name}-${base.version}.zip" basedir="build/dist" excludes="*">
                     <manifest>
                         <attribute name="Build-User" value="${user.name}"/>
                         <attribute name="Build-Time" value="${TODAY} ${TSTAMP}"/>
                         <attribute name="Vaadin-Package-Version" value="1"/>
-                        <attribute name="Implementation-Title" value="ServerPush"/>
+                        <attribute name="Implementation-Title" value="Forms"/>
                         <attribute name="Implementation-Version" value="${base.version}"/>
                         <attribute name="Vaadin-Addon" value="${base.name}-${base.version}.jar"/>
                     </manifest>
@@ -106,7 +110,7 @@
                         <exclude name="*.zip"/>
                         <include name="${base.name}-${base.version}.jar"/>
                     </fileset>
-                    <fileset dir="src/main/webapp"/>
+                    <fileset dir="../../samples/locationform/build/dist/" includes="*.war"/>
                     <fileset dir="../../" includes="README"/>
                 </jar>
             </sequential>

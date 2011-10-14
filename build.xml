@@ -8,6 +8,7 @@
     </target>
 
     <target name="samples" description="Builds samples">
+        <ant antfile="build.xml" target="all" dir="samples/locationform"/>
     </target>
 
 </project>
