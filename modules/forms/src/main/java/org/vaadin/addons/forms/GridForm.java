@@ -48,7 +48,7 @@ public class GridForm extends Form {
     }
 
     public void setConstraints(GridConstraints gridConstraints) {
-        if (gridConstraints != null) {
+        if (gridConstraints != null && gridConstraints != this.constraints) {
             final List<Object> visibleProperties = new ArrayList<Object>();
             synchronized (this.constraints) {
                 this.constraints.clear();
